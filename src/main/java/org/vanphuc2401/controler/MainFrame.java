@@ -8,16 +8,18 @@ import java.awt.event.ActionListener;
 public class MainFrame extends JFrame implements ActionListener, Runnable {
     private int row;
     private int col;
-    private int width;
-    private int height;
-    private ButtonEvent graphicsPanel;
+    private GamePanel gamePanel;
+    private JLabel lbScore;
+    private JProgressBar progressTime;
+    private JLabel lbTime;
+
+    private JButton btnNewGame;
     private JPanel mainPanel;
+    private ControlPanel controlPanel;
 
     public MainFrame(int row, int col, int width, int height) {
         this.row = row;
         this.col = col;
-        this.width = width;
-        this.height = height;
         add(mainPanel = createMainPanel());
         setTitle("Pokemon Game");
         setResizable(false);
@@ -31,21 +33,29 @@ public class MainFrame extends JFrame implements ActionListener, Runnable {
     private JPanel createMainPanel() {
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(createGraphicsPanel(), BorderLayout.CENTER);
+        panel.add(createControlPanel(), BorderLayout.EAST);
         return panel;
     }
 
     private JPanel createGraphicsPanel() {
-        graphicsPanel = new ButtonEvent(row, col);
+        gamePanel = new GamePanel(row, col);
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBackground(Color.gray);
-        panel.add(graphicsPanel);
+        panel.add(gamePanel);
+        return panel;
+    }
+
+    private JPanel createControlPanel() {
+        controlPanel = new ControlPanel();
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.setBackground(Color.gray);
+        panel.add(controlPanel);
         return panel;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
     }
-
 
     @Override
     public void run() {
