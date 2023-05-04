@@ -16,6 +16,10 @@ public class Point implements Comparable<Point> {
         this.icon = icon;
     }
 
+    public void removeIcon() {
+        this.icon = null;
+    }
+
     public int getX() {
         return x;
     }
@@ -31,7 +35,6 @@ public class Point implements Comparable<Point> {
     public void setIcon(CustomIcon icon) {
         this.icon = icon;
     }
-
 
     @Override
     public int compareTo(Point point) {
